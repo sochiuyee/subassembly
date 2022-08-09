@@ -1,0 +1,44 @@
+/*将公共的CSS提取出来，可以简化CSS的编写，一般将mxin单独写在一个叫mixin.scss文件当中，全局引入*/
+
+@mixin button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $border-radius){
+  padding: $btn-padding-y $btn-padding-x;
+	font-size: $btn-font-size;
+	border-radius: $border-radius;
+}
+
+@mixin button-style(
+	$background,
+	$border,
+	$color,
+  /*lighten($color, $amount) 通过改变颜色的亮度值，让颜色变亮，创建一个新的颜色*/
+	$hover-background: lighten($background, 7.5%),
+	$hover-border: lighten($border, 10%),
+	$hover-color: $color
+) {
+	color: $color;
+  background: $background;
+  border-color: $border;
+  &:hover {
+    color: $hover-color;
+    background: $hover-background;
+    border-color: $hover-border;    
+  }
+  &:focus,
+  &.focus {
+    color: $hover-color;
+    background: $hover-background;
+    border-color: $hover-border;    
+  }
+  &:disabled,
+  &.disabled {
+    color: $color;
+    background: $background;
+    border-color: $border;    
+  }
+}
+
+@mixin alert-style($background, $color:$black) {
+  border: 1px solid $background;
+  background: #{$background}-bg;
+  color: $color;
+}

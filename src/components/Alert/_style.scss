@@ -1,0 +1,45 @@
+// 基本样式
+.alert {
+    margin: 0 auto;
+    max-width: 70%;
+    box-sizing: border-box;
+    position: relative;
+    padding: $alert-padding-x $alert-padding-y;
+    border-radius: $border-radius;
+    text-align: left;
+    .closeBtn {
+        font-size: 0.05rem;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.75rem;
+        cursor: pointer;
+    }
+    .message {
+        font-size: $font-size-lg;
+    }
+
+    .description {
+        font-size: $font-size-base;
+    }
+}
+
+.alert-default {
+    background: $blue-bg;
+    @include alert-style($primary)
+    
+}
+
+.alert-success {
+    background: $green-bg;
+    @include alert-style($success)
+}
+
+.alert-danger {
+    background: $red-bg;
+    @include alert-style($danger)
+}
+
+.alert-warning {
+    background: $yellow-bg;
+    @include alert-style($warning)
+}

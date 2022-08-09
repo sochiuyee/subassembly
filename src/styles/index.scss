@@ -1,0 +1,10 @@
+// scss 作用域是从上到下导入，基础的scss文件需要先导入
+@import "variables";
+@import "reboot";
+@import "mixin";
+
+// button
+@import "../components/Button/style";
+
+// alert
+@import "../components/Alert/style";
