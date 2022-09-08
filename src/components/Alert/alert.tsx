@@ -8,11 +8,11 @@ export enum AlertType {
     Danger = 'danger'
 }
 
-interface BaseAlertProps {
+export interface BaseAlertProps {
 	style?:React.CSSProperties;
 	closable?:boolean,
 	closeText?:string | React.ReactNode,
-	message?:string,
+	message:string,
 	description?:string,
 	type?:string,
 	className?:string,

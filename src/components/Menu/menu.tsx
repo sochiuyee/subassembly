@@ -1,61 +1,77 @@
-import React, {createContext, useState} from 'react'
-import classNames from 'classnames'
+import React, {createContext, useState} from "react";
+import classNames from "classnames";
+import {MenuItemProps} from "./menuItem"
 
 type MenuMode = 'horizontal' | 'vertical'
-
-type selectCallback = (selectedIndex:number) => void
-
 export interface MenuProps {
-    mode?: MenuMode;
-    className?:string;
-    defaultIndex?:number;
-    style?:React.CSSProperties;
-    children : React.ReactNode;
-    onSelect?:selectCallback
+    mode?:MenuMode,
+    className?:string,
+    style?:React.CSSProperties,
+    children?:React.ReactNode,
+    defaultIndex?:number,
+    onSelect?:(index:number) => void
 }
 
+// 定义要传递的context 规范
 interface IMenuContext {
-    index:number;
-    onSelect?:selectCallback;
+    index?:number,
+    onSelect?:(index:number) => void,
+    mode?:string
 }
 
-// 将父组件的数据传递给子组件
+// 需要导出创建的context，给子组件的menuItem 使用useContext(创建的context)
 export const MenuContext = createContext<IMenuContext>({index: 0})
 
+const Menu:React.FC<MenuProps> = (props) => {
+    const {mode, className, style, children, defaultIndex, onSelect} = props
 
-const Menu: React.FC<MenuProps> = (props) => {
-    const { children, mode, className,  defaultIndex, style, onSelect } = props
 
-    // 初始化高亮的选择的menuitem
+    // 点击改变高亮的menuItem
     const [currentActive, setActive] = useState(defaultIndex)
 
-    // 点击某个menuitem：1. 改变高亮的item 2.切换显示选中的menuitem
+    // 点击menu 会执行的回调：改变选中的menu，执行回调
     const handleClick = (index: number) => {
         setActive(index)
         onSelect && onSelect(index)
     }
 
-    const passedContext: IMenuContext = {
-        index: currentActive ? currentActive : 0,
+    // 定义要传递给menuItem的value值：点击高亮选中的menuItem，执行点击的回调
+    const passedContext:IMenuContext = {
+        index: currentActive || 0,
         onSelect: handleClick
     }
 
-    const classes = classNames('subassembly', className, {
-        'menu-vertical': mode === 'vertical'
+    const classes = classNames('menu', className, {
+        'menu-vertical':mode === 'vertical',
+        'menu-horizontal': mode !== 'vertical'
     })
 
+    // 如果在ul里无脑用children，那menu里如果嵌套了并不是menuItem的子组件，或者children传入了函数，不能使用children.map方法。React.Children 提供了用于处理 this.props.children 不透明数据结构的实用方法。
+    const renderChildren = () => {
+        return React.Children.map(children, (child, index) => {
+            const childElement = child as React.FunctionComponentElement<MenuItemProps>
+            const { displayName } = childElement.type
+            if (displayName === 'MenuItem') {
+                return React.cloneElement(childElement, {index})
+            } else {
+                console.warn("Warning Menu has a child which is not a MenuItem")
+            }
+        })
+    }
+
     return (
-        <ul className={classes} style={style}>
+        <ul className={classes} style={{...style}} data-testid="test-menu">
+            {/* 使用useContext 父子组件通信 */}
             <MenuContext.Provider value={passedContext}>
-                {children}
+                {renderChildren()}
             </MenuContext.Provider>
         </ul>
     )
 }
 
 Menu.defaultProps = {
-    mode: 'horizontal',
-    defaultIndex: 0
+    defaultIndex: 0,
+    mode: 'horizontal'
 }
 
 export default Menu

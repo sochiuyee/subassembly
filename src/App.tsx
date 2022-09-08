@@ -22,10 +22,10 @@ function App() {
             这是一个关闭文案
           </div>
         } onClose={() => window.alert('close')}></Alert>
-        <Menu defaultIndex={0} onSelect={(index) => alert(index)}>
-          <MenuItem index={1}>cool link 1</MenuItem>
-          <MenuItem index={2}>cool link 2</MenuItem>
-          <MenuItem index={3}>cool link 3</MenuItem>
+        <Menu defaultIndex={0} onSelect={(index) => alert(index)} mode="vertical">
+          <MenuItem>cool link 1</MenuItem>
+          <MenuItem>cool link 2</MenuItem>
+          <MenuItem>cool link 3</MenuItem>
         </Menu>
         <a
           className="App-link"
