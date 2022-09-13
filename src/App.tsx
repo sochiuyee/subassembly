@@ -4,6 +4,7 @@ import './styles/index.scss'
 import Alert, {AlertType} from './components/Alert/alert';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
+import SubMenu from './components/Menu/subMenu';
 
 function App() {
   return (
@@ -22,10 +23,14 @@ function App() {
             这是一个关闭文案
           </div>
         } onClose={() => window.alert('close')}></Alert>
-        <Menu defaultIndex={0} onSelect={(index) => alert(index)} mode="vertical">
+        <Menu defaultIndex='0' mode="vertical">
           <MenuItem>cool link 1</MenuItem>
-          <MenuItem>cool link 2</MenuItem>
-          <MenuItem>cool link 3</MenuItem>
+          <SubMenu title='cool link2'>
+            <MenuItem>link content 2</MenuItem>
+          </SubMenu>
+          <SubMenu title='cool link 3'>
+            <MenuItem></MenuItem>
+          </SubMenu>
         </Menu>
         <a
           className="App-link"
