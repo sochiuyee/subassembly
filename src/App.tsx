@@ -2,9 +2,10 @@ import React from 'react';
 import Button, {ButtonSize, ButtonType} from './components/Button/button';
 import './styles/index.scss'
 import Alert, {AlertType} from './components/Alert/alert';
-import Menu from './components/Menu/menu';
-import MenuItem from './components/Menu/menuItem';
-import SubMenu from './components/Menu/subMenu';
+import Icon from './components/Icon/icon';
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {library} from '@fortawesome/fontawesome-svg-core'
+library.add(fas)
 
 function App() {
   return (
@@ -23,23 +24,7 @@ function App() {
             这是一个关闭文案
           </div>
         } onClose={() => window.alert('close')}></Alert>
-        <Menu defaultIndex='0' mode="vertical">
-          <MenuItem>cool link 1</MenuItem>
-          <SubMenu title='cool link2'>
-            <MenuItem>link content 2</MenuItem>
-          </SubMenu>
-          <SubMenu title='cool link 3'>
-            <MenuItem></MenuItem>
-          </SubMenu>
-        </Menu>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Icon theme='danger' size='10x' icon='coffee'></Icon>
       </header>
     </div>
   );

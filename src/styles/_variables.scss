@@ -38,6 +38,7 @@ $danger-bg:    $red-bg !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
 
+// 创建icon主题的maps
 $theme-colors: 
 (
   "primary":    $primary,
@@ -298,3 +299,20 @@ $progress-bg:                       $gray-200 !default;
 $progress-border-radius:            $border-radius !default;
 $progress-bar-color:                $white !default;
 $progress-bar-transition:           width .6s ease !default;
+
+// Tabs
+$tabs-border-width:            $border-width !default;
+$tabs-border-color:            $border-color !default;
+$tabs-transition:              color .15s ease-in-out, border-color .15s ease-in-out !default;
+$tabs-box-shadow-bottom:       inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+$tabs-box-shadow-right:        inset 1px 1px 0 1px rgba($white, .15), 0 0 1px rgba($black, .075) !default;
+
+// tabs-pane
+$tabs-pane-margin-y:          .5rem !default;
+$tabs-pane-margin-x:          .5rem !default;
+$tabs-pane-active-color:       $primary !default;
+$tabs-pane-active-border-width: 2px !default;
+$tabs-pane-disabled-color:     $gray-600 !default;
+
+// subtabs
+$subtabs-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
